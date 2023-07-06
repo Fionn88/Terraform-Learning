@@ -8,6 +8,7 @@ variable "AWS_SECRET_KEY" {
 
 variable "AWS_REGION" {
   type        = string
+  default     = "ap-southeast-1"
 }
 
 variable "AMIS" {
