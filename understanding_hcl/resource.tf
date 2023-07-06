@@ -4,7 +4,7 @@ provider "aws"{
 
 }
 
-// 在資料夾內建立一個檔名為 .terraform.tfvars 檔案，內容如下
+// 在資料夾內建立一個檔名為 terraform.tfvars 檔案，內容如下
 // AWS_REGION="eu-west-1"
 
 variable "AWS_REGION" {
