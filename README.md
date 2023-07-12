@@ -6,6 +6,8 @@
     - [Teacher Note](https://github.com/wardviaene/terraform-course/tree/master)
 - 影片：Complete Terraform Course - Beginner to Advanced
     - [Video Class](https://www.udemy.com/course/complete-terraform-course-beginner-to-advanced/)
+- 影片：Terraform for the Absolute Beginners with Labs
+    - [Video Class](https://www.udemy.com/course/terraform-for-the-absolute-beginners/)
 
 ```
 > terraform version
