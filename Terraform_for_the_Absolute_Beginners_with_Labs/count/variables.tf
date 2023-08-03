@@ -2,7 +2,7 @@ variable filename {
     default = [
         "files/pets.txt",
         "files/dogs.txt",
-        "files/catws.txt",
+        "files/cat.txt",
         "files/cows.txt",
         "files/ducks.txt"
     ]
