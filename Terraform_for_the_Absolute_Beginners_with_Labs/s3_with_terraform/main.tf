@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "finance" {
-    bucket = "finance-11082023"
+    bucket = "finance-13082023"
     tags = {
         Description = "Finance and Payroll"
     }
@@ -7,8 +7,8 @@ resource "aws_s3_bucket" "finance" {
 
 
 resource "aws_s3_bucket_object" "finance-2023" {
-    content = "files/pet.txt"
-    key = "finance-2023.doc"
+    content = "terraform.tfstate"
+    key = "finance/terraform.tfstate"
     bucket = aws_s3_bucket.finance.id
 }
 
