@@ -5,14 +5,22 @@ resource "aws_instance" "webserver" {
     Name = "webserver"
     Description = "An Nginx WebServer on Ubuntu"
   }
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo apt update
-              sudo apt install nginx -y
-              systemctl enable nginx
-              systemctl start nginx
-              EOF
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt update",
+      "sudo apt install nginx -y",
+      "sudo systemctl enable nginx",
+      "sudo systemctl start nginx"
+    ]
+  }
+  connection {
+    host        = coalesce(self.public_ip, self.private_ip)
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file("files/mykey")
+  }
   key_name = aws_key_pair.web.id
+  vpc_security_group_ids = [ aws_security_group.ssh-access.id ]
 }
 
 resource "aws_key_pair" "web"{
