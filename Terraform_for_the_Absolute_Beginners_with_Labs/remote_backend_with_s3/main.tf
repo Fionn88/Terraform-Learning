@@ -1,14 +1,15 @@
-resource local_file pet {
-  content = "We love pets!"
-  filename             = "files/pets.txt"
-}
-
-
 terraform {
   backend "s3" {
-      bucket = "finance-13082023"
-      key = "finance/terraform.tfstate"
-      dynamodb_table = "state-locking"
-      region = "ap-southeast-1"
+    bucket = "s3-example-terraform-state" # 作成したS3バケット
+    region = "ap-southeast-1"
+    key = "terraform.tfstate"
+    encrypt = true
+  }
+}
+
+resource "aws_s3_bucket" "terraform_state" {
+  bucket = "s3-example-terraform-state"
+  versioning {
+    enabled = true
   }
 }
