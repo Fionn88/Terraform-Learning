@@ -5,14 +5,7 @@ resource "aws_instance" "webserver" {
     Name = "webserver"
     Description = "An Nginx WebServer on Ubuntu"
   }
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt install nginx -y",
-      "sudo systemctl enable nginx",
-      "sudo systemctl start nginx"
-    ]
-  }
+  user_data              = file("install-nginx.sh")
   connection {
     host        = coalesce(self.public_ip, self.private_ip)
     type        = "ssh"
@@ -31,13 +24,31 @@ resource "aws_security_group" "ssh-access"{
   name = "ssh-access"
   description = "Allow SSH access from the Internet"
   ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 }
+
 output publicip {
   value       = aws_instance.webserver.public_ip
 }
 
+output "aws_instance_public_dns" {
+  value = aws_instance.webserver.public_dns
+}
