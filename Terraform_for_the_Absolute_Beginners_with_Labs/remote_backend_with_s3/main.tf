@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "s3-example-terraform-state" # 作成したS3バケット
+    bucket = "s3-example-terraform-state"
     region = "ap-southeast-1"
     key = "terraform.tfstate"
     encrypt = true
